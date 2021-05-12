@@ -5,6 +5,46 @@ namespace SpriteKind {
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.vy += -100
 })
+function spawnThugs1 () {
+    thug11 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.Enemy)
+    thug11.setPosition(288, 217)
+    thug21 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.Enemy)
+    thug21.setPosition(288, 183)
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     getOutOfCar()
 })
@@ -51,7 +91,6 @@ function level3 () {
     megaCrav.setPosition(260, 115)
 }
 function getOutOfCar () {
-    exposition()
     escapeTruck.setImage(img`
         ............................fffffffffff...........
         ............................ffffffffffff..........
@@ -95,6 +134,8 @@ function getOutOfCar () {
         ..........dd..........................dd..........
         `)
     escapeTruck.setKind(SpriteKind.emptyTruck)
+    escapeTruck.vx = 0
+    escapeTruck.x = 75
     tiles.setTilemap(tilemap`level6`)
     mySprite = sprites.create(img`
         . . . . . . . . . . . . . 
@@ -114,11 +155,54 @@ function getOutOfCar () {
         . . . . 6 6 . 6 6 . . . . 
         . . . . f f . f f . . . . 
         `, SpriteKind.Player)
-    mySprite.setPosition(520, 183)
+    mySprite.setPosition(112, 183)
     mySprite.ay = 200
     controller.moveSprite(mySprite, 100, 0)
     scene.cameraFollowSprite(mySprite)
+    spawnThugs1()
 }
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 5 5 5 . . . . . 
+        . . . . . . . 5 d d d 5 . . . . 
+        . . . . . . . d d d d 5 . . . . 
+        . . . . . . d d f 1 d 5 . . . . 
+        . . . . . . . d d d d . . . . . 
+        . . . . . . . d d d d . . . . . 
+        . . . . . . . . . d . . . . . . 
+        . . . . . . 6 6 9 d 9 6 6 . . . 
+        . . . . . . 6 6 6 9 6 6 6 . . . 
+        . . . . . . 6 6 6 9 6 6 6 . . . 
+        . . . . . . d 6 6 6 6 6 d . . . 
+        . . . . . . . 6 6 6 6 6 . . . . 
+        . . . . . . . 6 6 . 6 6 . . . . 
+        . . . . . . . 6 6 . 6 6 . . . . 
+        . . . . . . . f f . f f . . . . 
+        `)
+    facing = 1
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(img`
+        . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 . . . . 
+        . . . . 5 d d d 5 . . . . 
+        . . . . 5 d d d d . . . . 
+        . . . . 5 d 1 f d d . . . 
+        . . . . . d d d d . . . . 
+        . . . . . d d d d . . . . 
+        . . . . . . d . . . . . . 
+        . . . 6 6 9 d 9 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . d 6 6 6 6 6 d . . . 
+        . . . . 6 6 6 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . f f . f f . . . . 
+        `)
+    facing = 0
+})
 function level1 () {
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -295,8 +379,23 @@ function exposition () {
     game.showLongText("For example, we were able to track down a mob boss near where you are.", DialogLayout.Top)
     game.showLongText("He runs most crime in this part of the country, so taking him out will be quite nice.", DialogLayout.Top)
     game.showLongText("He's holed up in a warehouse-ish building.  You'll know it when you see it.", DialogLayout.Top)
+    game.showLongText("Here's a reminder for what to do:", DialogLayout.Bottom)
+    game.showLongText("Left/Right buttons to move", DialogLayout.Bottom)
+    game.showLongText("Up button to jump", DialogLayout.Bottom)
+    game.showLongText("A lets you fire your weapon", DialogLayout.Bottom)
+    game.showLongText("B is to heal", DialogLayout.Bottom)
+    game.showLongText("Remember, take out enemies before they take out you.", DialogLayout.Bottom)
+    game.showLongText("A healthbar will indicate who's worse for wear.", DialogLayout.Bottom)
+    game.showLongText("Medkits will let you heal.", DialogLayout.Bottom)
+    game.showLongText("You will need to reload occasionally.", DialogLayout.Bottom)
+    game.showLongText("Don't be in the open when your bullets hit zero.", DialogLayout.Bottom)
+    game.showLongText("Alright, I think that's all.", DialogLayout.Top)
+    game.showLongText("Good luck, 008.", DialogLayout.Top)
 }
+let facing = 0
 let escapeTruck: Sprite = null
 let megaCrav: Sprite = null
+let thug21: Sprite = null
+let thug11: Sprite = null
 let mySprite: Sprite = null
 level1()
