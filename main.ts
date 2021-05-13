@@ -1,11 +1,33 @@
 namespace SpriteKind {
     export const MegaCrav = SpriteKind.create()
     export const emptyTruck = SpriteKind.create()
+    export const thug = SpriteKind.create()
+    export const enemyProjectile = SpriteKind.create()
+    export const badThug = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.vy += -100
 })
 function spawnThugs1 () {
+    info.setScore(1)
+    thugBullet = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 5 5 . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.enemyProjectile)
     thug11 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 . . . . . . . . 
@@ -23,7 +45,7 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.Enemy)
+        `, SpriteKind.thug)
     thug11.setPosition(288, 217)
     thug21 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -42,9 +64,172 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.Enemy)
-    thug21.setPosition(288, 183)
+        `, SpriteKind.thug)
+    thug21.setPosition(392, 183)
+    thug31 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug31.setPosition(392, 217)
+    thug41 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug41.setPosition(432, 217)
+    thug51 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug51.setPosition(480, 217)
+    thug61 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug61.setPosition(528, 217)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level8`)
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (facing == 0) {
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . 5 5 5 5 . . . . . . 
+            . . 5 d d d 5 . . . . . . 
+            . . 5 d d d d . . . . . . 
+            . . 5 d 1 f d d . . . . . 
+            . . . d d d d . . . . . . 
+            . . . d d d d . . . . . . 
+            . . . . d . . . . 4 4 4 4 
+            . 6 6 9 d 9 6 6 6 6 d . . 
+            . 6 6 6 9 6 6 . . . 4 . . 
+            . 6 6 6 9 6 6 . . . . . . 
+            . d 6 6 6 6 6 . . . . . . 
+            . . 6 6 6 6 6 . . . . . . 
+            . . 6 6 . 6 6 . . . . . . 
+            . . 6 6 . 6 6 . . . . . . 
+            . . f f . f f . . . . . . 
+            `)
+        bullet.setPosition(mySprite.x, mySprite.y)
+        bullet.vx = 50
+        pause(100)
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . . 5 5 5 5 . . . . 
+            . . . . 5 d d d 5 . . . . 
+            . . . . 5 d d d d . . . . 
+            . . . . 5 d 1 f d d . . . 
+            . . . . . d d d d . . . . 
+            . . . . . d d d d . . . . 
+            . . . . . . d . . . . . . 
+            . . . 6 6 9 d 9 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . d 6 6 6 6 6 d . . . 
+            . . . . 6 6 6 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . f f . f f . . . . 
+            `)
+    }
+    if (facing == 1) {
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . . . 5 5 5 5 . . . 
+            . . . . . . 5 d d d 5 . . 
+            . . . . . . d d d d 5 . . 
+            . . . . . d d f 1 d 5 . . 
+            . . . . . . d d d d . . . 
+            . . . . . . d d d d . . . 
+            4 4 4 4 . . . . d . . . . 
+            . . d 6 6 6 6 9 d 9 6 6 . 
+            . . 4 . . . 6 6 9 6 6 6 . 
+            . . . . . . 6 6 9 6 6 6 . 
+            . . . . . . 6 6 6 6 6 d . 
+            . . . . . . 6 6 6 6 6 . . 
+            . . . . . . 6 6 . 6 6 . . 
+            . . . . . . 6 6 . 6 6 . . 
+            . . . . . . f f . f f . . 
+            `)
+        bullet.setPosition(mySprite.x, mySprite.y)
+        bullet.vx = -50
+        pause(100)
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . 5 5 5 5 . . . . . 
+            . . . . 5 d d d 5 . . . . 
+            . . . . d d d d 5 . . . . 
+            . . . d d f 1 d 5 . . . . 
+            . . . . d d d d . . . . . 
+            . . . . d d d d . . . . . 
+            . . . . . . d . . . . . . 
+            . . . 6 6 9 d 9 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . d 6 6 6 6 6 d . . . 
+            . . . . 6 6 6 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . f f . f f . . . . 
+            `)
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
     getOutOfCar()
 })
@@ -91,6 +276,24 @@ function level3 () {
     megaCrav.setPosition(260, 115)
 }
 function getOutOfCar () {
+    bullet = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 3 3 . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile)
     escapeTruck.setImage(img`
         ............................fffffffffff...........
         ............................ffffffffffff..........
@@ -202,6 +405,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . f f . f f . . . . 
         `)
     facing = 0
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, otherSprite) {
+    game.over(false)
 })
 function level1 () {
     scene.setBackgroundImage(img`
@@ -392,10 +598,93 @@ function exposition () {
     game.showLongText("Alright, I think that's all.", DialogLayout.Top)
     game.showLongText("Good luck, 008.", DialogLayout.Top)
 }
-let facing = 0
 let escapeTruck: Sprite = null
 let megaCrav: Sprite = null
+let bullet: Sprite = null
+let facing = 0
+let thug61: Sprite = null
+let thug51: Sprite = null
+let thug41: Sprite = null
+let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
+let thugBullet: Sprite = null
 let mySprite: Sprite = null
 level1()
+forever(function () {
+    if (info.score() == 1) {
+        if (sight.isInSight(
+        thug11,
+        mySprite,
+        60,
+        true
+        )) {
+            thug11.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . 2 2 2 2 . . . . 
+                . . . . . . . . 2 d d d 2 . . . 
+                . . . . . . . . d d d d 2 . . . 
+                . . . . . . . d d f 1 d 2 . . . 
+                . . . . . . . . d d d d . . . . 
+                . . . . . . . . d d d d . . . . 
+                . a a a a . . . . . d . . . . . 
+                . . . a d f f f f 5 d 5 f f . . 
+                . . . . . . . . f f 5 f f f . . 
+                . . . . . . . . f f 5 f f f . . 
+                . . . . . . . . f f f f f d . . 
+                . . . . . . . . f f f f f . . . 
+                . . . . . . . . f f . f f . . . 
+                . . . . . . . . f f . f f . . . 
+                . . . . . . . . 2 2 . 2 2 . . . 
+                `)
+        }
+    }
+})
+forever(function () {
+    if (info.score() == 1) {
+        if (sight.isInSight(
+        thug31,
+        mySprite,
+        60,
+        true
+        )) {
+            thug31.follow(mySprite)
+            thug41.follow(mySprite)
+            thug51.follow(mySprite)
+            thug61.follow(mySprite)
+            thug31.ay = 1000
+            thug41.ay = 1000
+            thug51.ay = 1000
+            thug61.ay = 1000
+        }
+    }
+})
+forever(function () {
+    if (info.score() == 1) {
+        if (sight.isInSight(
+        thug21,
+        mySprite,
+        60,
+        true
+        )) {
+            thug21.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . 2 2 2 2 . . . . 
+                . . . . . . . . 2 d d d 2 . . . 
+                . . . . . . . . d d d d 2 . . . 
+                . . . . . . . d d f 1 d 2 . . . 
+                . . . . . . . . d d d d . . . . 
+                . . . . . . . . d d d d . . . . 
+                . a a a a . . . . . d . . . . . 
+                . . . a d f f f f 5 d 5 f f . . 
+                . . . . . . . . f f 5 f f f . . 
+                . . . . . . . . f f 5 f f f . . 
+                . . . . . . . . f f f f f d . . 
+                . . . . . . . . f f f f f . . . 
+                . . . . . . . . f f . f f . . . 
+                . . . . . . . . f f . f f . . . 
+                . . . . . . . . 2 2 . 2 2 . . . 
+                `)
+        }
+    }
+})
