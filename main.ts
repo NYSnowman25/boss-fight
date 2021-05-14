@@ -10,24 +10,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function spawnThugs1 () {
     info.setScore(1)
-    thugBullet = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 5 5 . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.enemyProjectile)
     thug11 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 . . . . . . . . 
@@ -46,6 +28,7 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
         `, SpriteKind.thug)
+    list.push(thug11)
     thug11.setPosition(288, 217)
     thug21 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -66,6 +49,7 @@ function spawnThugs1 () {
         . . . . 2 2 . 2 2 . . . . . . . 
         `, SpriteKind.thug)
     thug21.setPosition(392, 183)
+    list.push(thug21)
     thug31 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 . . . . . . . . 
@@ -145,6 +129,9 @@ function spawnThugs1 () {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
     tiles.setTilemap(tilemap`level8`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile24`, function (sprite, location) {
+    level2()
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (facing == 0) {
@@ -276,6 +263,28 @@ function level3 () {
     megaCrav.setPosition(260, 115)
 }
 function getOutOfCar () {
+    exposition()
+    mySprite = sprites.create(img`
+        . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 . . . . 
+        . . . . 5 d d d 5 . . . . 
+        . . . . 5 d d d d . . . . 
+        . . . . 5 d 1 f d d . . . 
+        . . . . . d d d d . . . . 
+        . . . . . d d d d . . . . 
+        . . . . . . d . . . . . . 
+        . . . 6 6 9 d 9 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . d 6 6 6 6 6 d . . . 
+        . . . . 6 6 6 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . f f . f f . . . . 
+        `, SpriteKind.Player)
+    mySprite.ay = 200
+    scene.cameraFollowSprite(mySprite)
+    controller.moveSprite(mySprite, 100, 0)
     bullet = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -364,6 +373,9 @@ function getOutOfCar () {
     scene.cameraFollowSprite(mySprite)
     spawnThugs1()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile25`, function (sprite, location) {
+    level3()
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . . . . . . . . . . 
@@ -410,6 +422,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, other
     game.over(false)
 })
 function level1 () {
+    info.setLife(3)
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -579,6 +592,10 @@ function level1 () {
     escapeTruck.vx = 400
     scene.cameraFollowSprite(escapeTruck)
 }
+function level2 () {
+    tiles.setTilemap(tilemap`level10`)
+    mySprite.setPosition(16, 210)
+}
 function exposition () {
     game.showLongText("Hello, 008.  Congrats on escaping that prison.", DialogLayout.Top)
     game.showLongText("The data you were able to collect in there was extremely useful for our operations.", DialogLayout.Top)
@@ -598,6 +615,10 @@ function exposition () {
     game.showLongText("Alright, I think that's all.", DialogLayout.Top)
     game.showLongText("Good luck, 008.", DialogLayout.Top)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile26`, function (sprite, location) {
+    mySprite.vy += -400
+})
+let projectile: Sprite = null
 let escapeTruck: Sprite = null
 let megaCrav: Sprite = null
 let bullet: Sprite = null
@@ -608,9 +629,10 @@ let thug41: Sprite = null
 let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
-let thugBullet: Sprite = null
 let mySprite: Sprite = null
+let list: Sprite[] = []
 level1()
+list = []
 forever(function () {
     if (info.score() == 1) {
         if (sight.isInSight(
@@ -686,5 +708,27 @@ forever(function () {
                 . . . . . . . . 2 2 . 2 2 . . . 
                 `)
         }
+    }
+})
+game.onUpdateInterval(500, function () {
+    for (let value of list) {
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 5 5 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, value, -50, 0)
     }
 })
