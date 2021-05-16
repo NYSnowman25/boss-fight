@@ -31,450 +31,13 @@ sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_2, function (s
     thugBar2.value += -34
     sprite.destroy()
 })
-function spawnThugs1 () {
-    info.setScore(10)
-    score = 1
-    jump = 1
-    thug11 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.gunThug_1)
-    thugBar1 = statusbars.create(20, 4, StatusBarKind.thug_1)
-    thugBar1.value = 100
-    thugBar1.setColor(5, 2)
-    thugBar1.attachToSprite(thug11)
-    list.push(thug11)
-    thug11.setPosition(288, 217)
-    thug21 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.gunThug_2)
-    thugBar2 = statusbars.create(20, 4, StatusBarKind.thug_2)
-    thugBar2.value = 100
-    thugBar2.setColor(5, 2)
-    thugBar2.attachToSprite(thug21)
-    thug21.setPosition(392, 183)
-    list.push(thug21)
-    thug31 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.badThug)
-    thug31.setPosition(392, 217)
-    thug41 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.badThug)
-    thug41.setPosition(432, 217)
-    thug51 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.badThug)
-    thug51.setPosition(480, 217)
-    thug61 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 2 2 2 . . . . . . . . 
-        . . . . 2 d d d 2 . . . . . . . 
-        . . . . d d d d 2 . . . . . . . 
-        . . . d d f 1 d 2 . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . d d d d . . . . . . . . 
-        . . . . . . d . . . . . . . . . 
-        . . . f f 5 d 5 f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . f f f 5 f f f . . . . . . 
-        . . . d f f f f f d . . . . . . 
-        . . . . f f f f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . f f . f f . . . . . . . 
-        . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.badThug)
-    thug61.setPosition(528, 217)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
-    tiles.setTilemap(tilemap`level8`)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile24`, function (sprite, location) {
-    level2()
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (facing == 0) {
-        mySprite.setImage(img`
-            . . . . . . . . . . . . . 
-            . . . 5 5 5 5 . . . . . . 
-            . . 5 d d d 5 . . . . . . 
-            . . 5 d d d d . . . . . . 
-            . . 5 d 1 f d d . . . . . 
-            . . . d d d d . . . . . . 
-            . . . d d d d . . . . . . 
-            . . . . d . . . . 4 4 4 4 
-            . 6 6 9 d 9 6 6 6 6 d . . 
-            . 6 6 6 9 6 6 . . . 4 . . 
-            . 6 6 6 9 6 6 . . . . . . 
-            . d 6 6 6 6 6 . . . . . . 
-            . . 6 6 6 6 6 . . . . . . 
-            . . 6 6 . 6 6 . . . . . . 
-            . . 6 6 . 6 6 . . . . . . 
-            . . f f . f f . . . . . . 
-            `)
-        if (0 < info.score()) {
-            timer.throttle("fire", 500, function () {
-                for (let value of bulletList) {
-                    bullet = sprites.createProjectileFromSprite(img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . 3 3 . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `, mySprite, 30, 0)
-                    bullet.setKind(SpriteKind.blondeProjectile)
-                    info.changeScoreBy(-1)
-                }
-            })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (info.life() > 0) {
+        if (statusbar.value > 0) {
+            statusbar.value = 100
+            info.changeLifeBy(-1)
         }
-        pause(200)
-        mySprite.setImage(img`
-            . . . . . . . . . . . . . 
-            . . . . . 5 5 5 5 . . . . 
-            . . . . 5 d d d 5 . . . . 
-            . . . . 5 d d d d . . . . 
-            . . . . 5 d 1 f d d . . . 
-            . . . . . d d d d . . . . 
-            . . . . . d d d d . . . . 
-            . . . . . . d . . . . . . 
-            . . . 6 6 9 d 9 6 6 . . . 
-            . . . 6 6 6 9 6 6 6 . . . 
-            . . . 6 6 6 9 6 6 6 . . . 
-            . . . d 6 6 6 6 6 d . . . 
-            . . . . 6 6 6 6 6 . . . . 
-            . . . . 6 6 . 6 6 . . . . 
-            . . . . 6 6 . 6 6 . . . . 
-            . . . . f f . f f . . . . 
-            `)
     }
-    if (facing == 1) {
-        mySprite.setImage(img`
-            . . . . . . . . . . . . . 
-            . . . . . . 5 5 5 5 . . . 
-            . . . . . . 5 d d d 5 . . 
-            . . . . . . d d d d 5 . . 
-            . . . . . d d f 1 d 5 . . 
-            . . . . . . d d d d . . . 
-            . . . . . . d d d d . . . 
-            4 4 4 4 . . . . d . . . . 
-            . . d 6 6 6 6 9 d 9 6 6 . 
-            . . 4 . . . 6 6 9 6 6 6 . 
-            . . . . . . 6 6 9 6 6 6 . 
-            . . . . . . 6 6 6 6 6 d . 
-            . . . . . . 6 6 6 6 6 . . 
-            . . . . . . 6 6 . 6 6 . . 
-            . . . . . . 6 6 . 6 6 . . 
-            . . . . . . f f . f f . . 
-            `)
-        if (0 < info.score()) {
-            timer.throttle("fire", 500, function () {
-                for (let value of bulletList) {
-                    bullet = sprites.createProjectileFromSprite(img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . 3 3 . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `, mySprite, -30, 0)
-                    bullet.setKind(SpriteKind.blondeProjectile)
-                    info.changeScoreBy(-1)
-                }
-            })
-        }
-        pause(200)
-        mySprite.setImage(img`
-            . . . . . . . . . . . . . 
-            . . . . 5 5 5 5 . . . . . 
-            . . . . 5 d d d 5 . . . . 
-            . . . . d d d d 5 . . . . 
-            . . . d d f 1 d 5 . . . . 
-            . . . . d d d d . . . . . 
-            . . . . d d d d . . . . . 
-            . . . . . . d . . . . . . 
-            . . . 6 6 9 d 9 6 6 . . . 
-            . . . 6 6 6 9 6 6 6 . . . 
-            . . . 6 6 6 9 6 6 6 . . . 
-            . . . d 6 6 6 6 6 d . . . 
-            . . . . 6 6 6 6 6 . . . . 
-            . . . . 6 6 . 6 6 . . . . 
-            . . . . 6 6 . 6 6 . . . . 
-            . . . . f f . f f . . . . 
-            `)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
-    getOutOfCar()
-})
-function level3 () {
-    tiles.setTilemap(tilemap`level1`)
-    megaCrav = sprites.create(img`
-        ................................................
-        ................................................
-        ................................................
-        ......2222............................2222......
-        ......2222............................2222......
-        ....222222..22....................22..222222....
-        ....222222..22....................22..222222....
-        ....2222....2222................2222....2222....
-        ....2222....2222................2222....2222....
-        ..222222....2222................2222....222222..
-        ..222222....2222................2222....222222..
-        ..222222..222222................222222..222222..
-        ..222222..222222................222222..222222..
-        ..22222222222222................22222222222222..
-        ..22222222222222................22222222222222..
-        ..222222222222....................222222222222..
-        ..222222222222....................222222222222..
-        ....22222222..........2222..........22222222....
-        ....22222222......222222222222......22222222....
-        ......2222........222222222222........2222......
-        ......2222......22ff22222222ff22......2222......
-        ........2222....22ff22222222ff22....2222........
-        ........22222222222222222222222222222222........
-        ............222222222222222222222222............
-        ..............22222222222222222222..............
-        ..............22222222222222222222..............
-        ............ff..2222222222222222..ff............
-        ............ff..2222222222222222..ff............
-        ..........ff....ff222222222222ff....ff..........
-        ..........ff....ff222222222222ff....ff..........
-        ..........ff..ff................ff..ff..........
-        ..........ff..ff................ff..ff..........
-        ..........ff..ff................ff..ff..........
-        ..........ff..ff................ff..ff..........
-        ................................................
-        ................................................
-        `, SpriteKind.MegaCrav)
-    megaCrav.setPosition(260, 115)
-}
-function getOutOfCar () {
-    exposition()
-    escapeTruck.setImage(img`
-        ............................fffffffffff...........
-        ............................ffffffffffff..........
-        ............................fff11111111ff.........
-        ............................fff111111111ff........
-        ............................fff1111111111ff.......
-        ...........................ffff11111111111ff......
-        ...........................ffff111111111111ff.....
-        ..........................fffff1111111111111ff....
-        ..........................fffff11111111111111ff...
-        .........................ffffff11111111111111ff...
-        .........................ffffff11111111111111ff...
-        ........................fffffff111111111111f1ff...
-        ........................fffffff111111111111ffff...
-        .......................ffffffff111111111111f1ff...
-        .......................ffffffff11111111111111ff...
-        ......................fffffffff11111111111111ff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        ...ffffffffffffffffffffffffffffffffffffffffffff...
-        .....cccc.dd.cccc................cccc.dd.cccc.....
-        ....cccc.dddd.cccc..............cccc.dddd.cccc....
-        ...cccc.ddbbdd.cccc............cccc.ddbbdd.cccc...
-        ...ccc.ddbbbbdd.ccc............ccc.ddbbbbdd.ccc...
-        ...cc.ddbbffbbdd.cc............cc.ddbbffbbdd.cc...
-        ...c.ddbbffffbbdd.c............c.ddbbffffbbdd.c...
-        ....ddbbff11ffbbdd..............ddbbff11ffbbdd....
-        ...ddbbff1111ffbbdd............ddbbff1111ffbbdd...
-        ...ddbbff1111ffbbdd............ddbbff1111ffbbdd...
-        ....ddbbff11ffbbdd..............ddbbff11ffbbdd....
-        .....ddbbffffbbdd................ddbbffffbbdd.....
-        ......ddbbffbbdd..................ddbbffbbdd......
-        .......ddbbbbdd....................ddbbbbdd.......
-        ........ddbbdd......................ddbbdd........
-        .........dddd........................dddd.........
-        ..........dd..........................dd..........
-        `)
-    escapeTruck.setKind(SpriteKind.emptyTruck)
-    escapeTruck.vx = 0
-    escapeTruck.x = 75
-    tiles.setTilemap(tilemap`level6`)
-    mySprite = sprites.create(img`
-        . . . . . . . . . . . . . 
-        . . . . . 5 5 5 5 . . . . 
-        . . . . 5 d d d 5 . . . . 
-        . . . . 5 d d d d . . . . 
-        . . . . 5 d 1 f d d . . . 
-        . . . . . d d d d . . . . 
-        . . . . . d d d d . . . . 
-        . . . . . . d . . . . . . 
-        . . . 6 6 9 d 9 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . d 6 6 6 6 6 d . . . 
-        . . . . 6 6 6 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . f f . f f . . . . 
-        `, SpriteKind.Player)
-    bulletList.push(mySprite)
-    mySprite.setPosition(112, 183)
-    mySprite.ay = 200
-    controller.moveSprite(mySprite, 100, 0)
-    scene.cameraFollowSprite(mySprite)
-    statusbar = statusbars.create(4, 50, StatusBarKind.Health)
-    statusbar.setColor(7, 2)
-    statusbar.setOffsetPadding(2, 2)
-    statusbar.positionDirection(CollisionDirection.Left)
-    spawnThugs1()
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile25`, function (sprite, location) {
-    level3()
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setImage(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 5 5 5 5 . . . . . 
-        . . . . . . . 5 d d d 5 . . . . 
-        . . . . . . . d d d d 5 . . . . 
-        . . . . . . d d f 1 d 5 . . . . 
-        . . . . . . . d d d d . . . . . 
-        . . . . . . . d d d d . . . . . 
-        . . . . . . . . . d . . . . . . 
-        . . . . . . 6 6 9 d 9 6 6 . . . 
-        . . . . . . 6 6 6 9 6 6 6 . . . 
-        . . . . . . 6 6 6 9 6 6 6 . . . 
-        . . . . . . d 6 6 6 6 6 d . . . 
-        . . . . . . . 6 6 6 6 6 . . . . 
-        . . . . . . . 6 6 . 6 6 . . . . 
-        . . . . . . . 6 6 . 6 6 . . . . 
-        . . . . . . . f f . f f . . . . 
-        `)
-    facing = 1
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.setImage(img`
-        . . . . . . . . . . . . . 
-        . . . . . 5 5 5 5 . . . . 
-        . . . . 5 d d d 5 . . . . 
-        . . . . 5 d d d d . . . . 
-        . . . . 5 d 1 f d d . . . 
-        . . . . . d d d d . . . . 
-        . . . . . d d d d . . . . 
-        . . . . . . d . . . . . . 
-        . . . 6 6 9 d 9 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . d 6 6 6 6 6 d . . . 
-        . . . . 6 6 6 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . f f . f f . . . . 
-        `)
-    facing = 0
-})
-statusbars.onZero(StatusBarKind.thug_1, function (status) {
-    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
-    list.shift()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, otherSprite) {
-    game.over(false)
-})
-statusbars.onZero(StatusBarKind.thug_2, function (status) {
-    thugBar2.spriteAttachedTo().destroy(effects.fire, 500)
-    list.pop()
 })
 function level1 () {
     info.setLife(3)
@@ -647,10 +210,463 @@ function level1 () {
     escapeTruck.vx = 400
     scene.cameraFollowSprite(escapeTruck)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level8`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile24`, function (sprite, location) {
+    level2()
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (facing == 0) {
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . 5 5 5 5 . . . . . . 
+            . . 5 d d d 5 . . . . . . 
+            . . 5 d d d d . . . . . . 
+            . . 5 d 1 f d d . . . . . 
+            . . . d d d d . . . . . . 
+            . . . d d d d . . . . . . 
+            . . . . d . . . . 4 4 4 4 
+            . 6 6 9 d 9 6 6 6 6 d . . 
+            . 6 6 6 9 6 6 . . . 4 . . 
+            . 6 6 6 9 6 6 . . . . . . 
+            . d 6 6 6 6 6 . . . . . . 
+            . . 6 6 6 6 6 . . . . . . 
+            . . 6 6 . 6 6 . . . . . . 
+            . . 6 6 . 6 6 . . . . . . 
+            . . f f . f f . . . . . . 
+            `)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . . 5 5 5 5 . . . . 
+            . . . . 5 d d d 5 . . . . 
+            . . . . 5 d d d d . . . . 
+            . . . . 5 d 1 f d d . . . 
+            . . . . . d d d d . . . . 
+            . . . . . d d d d . . . . 
+            . . . . . . d . . . . . . 
+            . . . 6 6 9 d 9 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . d 6 6 6 6 6 d . . . 
+            . . . . 6 6 6 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . f f . f f . . . . 
+            `)
+    }
+    if (facing == 1) {
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . . . 5 5 5 5 . . . 
+            . . . . . . 5 d d d 5 . . 
+            . . . . . . d d d d 5 . . 
+            . . . . . d d f 1 d 5 . . 
+            . . . . . . d d d d . . . 
+            . . . . . . d d d d . . . 
+            4 4 4 4 . . . . d . . . . 
+            . . d 6 6 6 6 9 d 9 6 6 . 
+            . . 4 . . . 6 6 9 6 6 6 . 
+            . . . . . . 6 6 9 6 6 6 . 
+            . . . . . . 6 6 6 6 6 d . 
+            . . . . . . 6 6 6 6 6 . . 
+            . . . . . . 6 6 . 6 6 . . 
+            . . . . . . 6 6 . 6 6 . . 
+            . . . . . . f f . f f . . 
+            `)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value2 of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        mySprite.setImage(img`
+            . . . . . . . . . . . . . 
+            . . . . 5 5 5 5 . . . . . 
+            . . . . 5 d d d 5 . . . . 
+            . . . . d d d d 5 . . . . 
+            . . . d d f 1 d 5 . . . . 
+            . . . . d d d d . . . . . 
+            . . . . d d d d . . . . . 
+            . . . . . . d . . . . . . 
+            . . . 6 6 9 d 9 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . 6 6 6 9 6 6 6 . . . 
+            . . . d 6 6 6 6 6 d . . . 
+            . . . . 6 6 6 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . 6 6 . 6 6 . . . . 
+            . . . . f f . f f . . . . 
+            `)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
+    getOutOfCar()
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
+    statusbar.value += -20
+    projectile.destroy()
+})
+function getOutOfCar () {
+    exposition()
+    escapeTruck.setImage(img`
+        ............................fffffffffff...........
+        ............................ffffffffffff..........
+        ............................fff11111111ff.........
+        ............................fff111111111ff........
+        ............................fff1111111111ff.......
+        ...........................ffff11111111111ff......
+        ...........................ffff111111111111ff.....
+        ..........................fffff1111111111111ff....
+        ..........................fffff11111111111111ff...
+        .........................ffffff11111111111111ff...
+        .........................ffffff11111111111111ff...
+        ........................fffffff111111111111f1ff...
+        ........................fffffff111111111111ffff...
+        .......................ffffffff111111111111f1ff...
+        .......................ffffffff11111111111111ff...
+        ......................fffffffff11111111111111ff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        ...ffffffffffffffffffffffffffffffffffffffffffff...
+        .....cccc.dd.cccc................cccc.dd.cccc.....
+        ....cccc.dddd.cccc..............cccc.dddd.cccc....
+        ...cccc.ddbbdd.cccc............cccc.ddbbdd.cccc...
+        ...ccc.ddbbbbdd.ccc............ccc.ddbbbbdd.ccc...
+        ...cc.ddbbffbbdd.cc............cc.ddbbffbbdd.cc...
+        ...c.ddbbffffbbdd.c............c.ddbbffffbbdd.c...
+        ....ddbbff11ffbbdd..............ddbbff11ffbbdd....
+        ...ddbbff1111ffbbdd............ddbbff1111ffbbdd...
+        ...ddbbff1111ffbbdd............ddbbff1111ffbbdd...
+        ....ddbbff11ffbbdd..............ddbbff11ffbbdd....
+        .....ddbbffffbbdd................ddbbffffbbdd.....
+        ......ddbbffbbdd..................ddbbffbbdd......
+        .......ddbbbbdd....................ddbbbbdd.......
+        ........ddbbdd......................ddbbdd........
+        .........dddd........................dddd.........
+        ..........dd..........................dd..........
+        `)
+    escapeTruck.setKind(SpriteKind.emptyTruck)
+    escapeTruck.vx = 0
+    escapeTruck.x = 75
+    tiles.setTilemap(tilemap`level6`)
+    mySprite = sprites.create(img`
+        . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 . . . . 
+        . . . . 5 d d d 5 . . . . 
+        . . . . 5 d d d d . . . . 
+        . . . . 5 d 1 f d d . . . 
+        . . . . . d d d d . . . . 
+        . . . . . d d d d . . . . 
+        . . . . . . d . . . . . . 
+        . . . 6 6 9 d 9 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . d 6 6 6 6 6 d . . . 
+        . . . . 6 6 6 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . f f . f f . . . . 
+        `, SpriteKind.Player)
+    bulletList.push(mySprite)
+    mySprite.setPosition(112, 183)
+    mySprite.ay = 200
+    controller.moveSprite(mySprite, 100, 0)
+    scene.cameraFollowSprite(mySprite)
+    statusbar = statusbars.create(4, 50, StatusBarKind.Health)
+    statusbar.value = 100
+    statusbar.setColor(7, 2)
+    statusbar.setOffsetPadding(2, 2)
+    statusbar.positionDirection(CollisionDirection.Left)
+    spawnThugs1()
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile25`, function (sprite, location) {
+    level3()
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 5 5 5 . . . . . 
+        . . . . . . . 5 d d d 5 . . . . 
+        . . . . . . . d d d d 5 . . . . 
+        . . . . . . d d f 1 d 5 . . . . 
+        . . . . . . . d d d d . . . . . 
+        . . . . . . . d d d d . . . . . 
+        . . . . . . . . . d . . . . . . 
+        . . . . . . 6 6 9 d 9 6 6 . . . 
+        . . . . . . 6 6 6 9 6 6 6 . . . 
+        . . . . . . 6 6 6 9 6 6 6 . . . 
+        . . . . . . d 6 6 6 6 6 d . . . 
+        . . . . . . . 6 6 6 6 6 . . . . 
+        . . . . . . . 6 6 . 6 6 . . . . 
+        . . . . . . . 6 6 . 6 6 . . . . 
+        . . . . . . . f f . f f . . . . 
+        `)
+    facing = 1
+})
+function level3 () {
+    tiles.setTilemap(tilemap`level1`)
+    game.splash("Level 2 complete.", "On to Level 3.")
+    info.setLife(3)
+    megaCrav = sprites.create(img`
+        ................................................
+        ................................................
+        ................................................
+        ......2222............................2222......
+        ......2222............................2222......
+        ....222222..22....................22..222222....
+        ....222222..22....................22..222222....
+        ....2222....2222................2222....2222....
+        ....2222....2222................2222....2222....
+        ..222222....2222................2222....222222..
+        ..222222....2222................2222....222222..
+        ..222222..222222................222222..222222..
+        ..222222..222222................222222..222222..
+        ..22222222222222................22222222222222..
+        ..22222222222222................22222222222222..
+        ..222222222222....................222222222222..
+        ..222222222222....................222222222222..
+        ....22222222..........2222..........22222222....
+        ....22222222......222222222222......22222222....
+        ......2222........222222222222........2222......
+        ......2222......22ff22222222ff22......2222......
+        ........2222....22ff22222222ff22....2222........
+        ........22222222222222222222222222222222........
+        ............222222222222222222222222............
+        ..............22222222222222222222..............
+        ..............22222222222222222222..............
+        ............ff..2222222222222222..ff............
+        ............ff..2222222222222222..ff............
+        ..........ff....ff222222222222ff....ff..........
+        ..........ff....ff222222222222ff....ff..........
+        ..........ff..ff................ff..ff..........
+        ..........ff..ff................ff..ff..........
+        ..........ff..ff................ff..ff..........
+        ..........ff..ff................ff..ff..........
+        ................................................
+        ................................................
+        `, SpriteKind.MegaCrav)
+    megaCrav.setPosition(260, 115)
+}
 function level2 () {
     tiles.setTilemap(tilemap`level10`)
+    game.splash("Level 1 complete.", "On to Level 2.")
     escapeTruck.destroy()
     mySprite.setPosition(16, 210)
+}
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    mySprite.setImage(img`
+        . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 . . . . 
+        . . . . 5 d d d 5 . . . . 
+        . . . . 5 d d d d . . . . 
+        . . . . 5 d 1 f d d . . . 
+        . . . . . d d d d . . . . 
+        . . . . . d d d d . . . . 
+        . . . . . . d . . . . . . 
+        . . . 6 6 9 d 9 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . 6 6 6 9 6 6 6 . . . 
+        . . . d 6 6 6 6 6 d . . . 
+        . . . . 6 6 6 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . 6 6 . 6 6 . . . . 
+        . . . . f f . f f . . . . 
+        `)
+    facing = 0
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, otherSprite) {
+    game.over(false)
+})
+statusbars.onZero(StatusBarKind.thug_2, function (status) {
+    thugBar2.spriteAttachedTo().destroy(effects.fire, 500)
+    list.pop()
+})
+function spawnThugs1 () {
+    info.setScore(10)
+    score = 1
+    jump = 1
+    thug11 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.gunThug_1)
+    thugBar1 = statusbars.create(20, 4, StatusBarKind.thug_1)
+    thugBar1.value = 100
+    thugBar1.setColor(5, 2)
+    thugBar1.attachToSprite(thug11)
+    list.push(thug11)
+    thug11.setPosition(288, 217)
+    thug21 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.gunThug_2)
+    thugBar2 = statusbars.create(20, 4, StatusBarKind.thug_2)
+    thugBar2.value = 100
+    thugBar2.setColor(5, 2)
+    thugBar2.attachToSprite(thug21)
+    thug21.setPosition(392, 183)
+    list.push(thug21)
+    thug31 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug31.setPosition(392, 217)
+    thug41 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug41.setPosition(432, 217)
+    thug51 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug51.setPosition(480, 217)
+    thug61 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 2 2 2 . . . . . . . . 
+        . . . . 2 d d d 2 . . . . . . . 
+        . . . . d d d d 2 . . . . . . . 
+        . . . d d f 1 d 2 . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . d d d d . . . . . . . . 
+        . . . . . . d . . . . . . . . . 
+        . . . f f 5 d 5 f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . f f f 5 f f f . . . . . . 
+        . . . d f f f f f d . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . f f . f f . . . . . . . 
+        . . . . 2 2 . 2 2 . . . . . . . 
+        `, SpriteKind.badThug)
+    thug61.setPosition(528, 217)
 }
 function exposition () {
     game.showLongText("Hello, 008.  Congrats on escaping that prison.", DialogLayout.Top)
@@ -672,12 +688,6 @@ function exposition () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile26`, function (sprite, location) {
     mySprite.vy += -400
 })
-let projectile: Sprite = null
-let statusbar: StatusBarSprite = null
-let escapeTruck: Sprite = null
-let megaCrav: Sprite = null
-let bullet: Sprite = null
-let facing = 0
 let thug61: Sprite = null
 let thug51: Sprite = null
 let thug41: Sprite = null
@@ -685,6 +695,12 @@ let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
 let score = 0
+let megaCrav: Sprite = null
+let projectile: Sprite = null
+let bullet: Sprite = null
+let facing = 0
+let escapeTruck: Sprite = null
+let statusbar: StatusBarSprite = null
 let thugBar2: StatusBarSprite = null
 let mySprite: Sprite = null
 let jump = 0
@@ -695,7 +711,7 @@ level1()
 list = []
 bulletList = []
 game.onUpdateInterval(2000, function () {
-    for (let value of list) {
+    for (let value3 of list) {
         projectile = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -713,7 +729,7 @@ game.onUpdateInterval(2000, function () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
-            `, value, -30, 0)
+            `, value3, -30, 0)
     }
 })
 forever(function () {
