@@ -8,19 +8,55 @@ namespace SpriteKind {
     export const gunThug_2 = SpriteKind.create()
     export const blondeProjectile = SpriteKind.create()
 }
+namespace StatusBarKind {
+    export const thug_1 = StatusBarKind.create()
+    export const thug_2 = StatusBarKind.create()
+}
 sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_1, function (sprite, otherSprite) {
-    thugBar1.value += 10
+    thugBar1.value += -34
     sprite.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy += -100
+    if (0 < jump) {
+        mySprite.vy += -100
+        jump += -11
+    }
+})
+scene.onHitWall(SpriteKind.Player, function (sprite, location) {
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        jump = 1
+    }
 })
 sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_2, function (sprite, otherSprite) {
-    thugBar2.value += 10
+    thugBar2.value += -34
     sprite.destroy()
 })
 function spawnThugs1 () {
-    info.setScore(1)
+    score = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
+    info.setScore(10)
+    score = 1
+    jump = 1
     thug11 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 . . . . . . . . 
@@ -39,8 +75,8 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
         `, SpriteKind.gunThug_1)
-    thugBar1 = statusbars.create(20, 4, StatusBarKind.Health)
-    thugBar1.value = 30
+    thugBar1 = statusbars.create(20, 4, StatusBarKind.thug_1)
+    thugBar1.value = 100
     thugBar1.setColor(5, 2)
     thugBar1.attachToSprite(thug11)
     list.push(thug11)
@@ -63,8 +99,8 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
         `, SpriteKind.gunThug_2)
-    thugBar2 = statusbars.create(20, 4, StatusBarKind.Health)
-    thugBar2.value = 30
+    thugBar2 = statusbars.create(20, 4, StatusBarKind.thug_2)
+    thugBar2.value = 100
     thugBar2.setColor(5, 2)
     thugBar2.attachToSprite(thug21)
     thug21.setPosition(392, 183)
@@ -172,9 +208,245 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . 6 6 . 6 6 . . . . . . 
             . . f f . f f . . . . . . 
             `)
-        bullet.setPosition(mySprite.x, mySprite.y)
-        bullet.vx = 30
-        pause(100)
+        timer.throttle("fire", 500, function () {
+            for (let value of bulletList) {
+                bullet = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . 3 3 . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, 30, 0)
+                bullet.setKind(SpriteKind.blondeProjectile)
+            }
+        })
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, 30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
         mySprite.setImage(img`
             . . . . . . . . . . . . . 
             . . . . . 5 5 5 5 . . . . 
@@ -213,9 +485,245 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . 6 6 . 6 6 . . 
             . . . . . . f f . f f . . 
             `)
-        bullet.setPosition(mySprite.x, mySprite.y)
-        bullet.vx = -30
-        pause(100)
+        timer.throttle("fire", 500, function () {
+            for (let value of bulletList) {
+                bullet = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . 3 3 . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, -30, 0)
+                bullet.setKind(SpriteKind.blondeProjectile)
+            }
+        })
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
+        if (0 < info.score()) {
+            timer.throttle("fire", 500, function () {
+                for (let value of bulletList) {
+                    bullet = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . 3 3 . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, mySprite, -30, 0)
+                    bullet.setKind(SpriteKind.blondeProjectile)
+                    info.changeScoreBy(-1)
+                }
+            })
+        }
+        pause(200)
         mySprite.setImage(img`
             . . . . . . . . . . . . . 
             . . . . 5 5 5 5 . . . . . 
@@ -283,24 +791,6 @@ function level3 () {
 }
 function getOutOfCar () {
     exposition()
-    bullet = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . 3 3 . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.blondeProjectile)
     escapeTruck.setImage(img`
         ............................fffffffffff...........
         ............................ffffffffffff..........
@@ -365,6 +855,7 @@ function getOutOfCar () {
         . . . . 6 6 . 6 6 . . . . 
         . . . . f f . f f . . . . 
         `, SpriteKind.Player)
+    bulletList.push(mySprite)
     mySprite.setPosition(112, 183)
     mySprite.ay = 200
     controller.moveSprite(mySprite, 100, 0)
@@ -416,8 +907,51 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         `)
     facing = 0
 })
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+info.onLifeZero(function () {
+	
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
+statusbars.onZero(StatusBarKind.thug_1, function (status) {
+    thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
+    list.shift()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, otherSprite) {
     game.over(false)
+})
+statusbars.onZero(StatusBarKind.thug_2, function (status) {
+    thugBar2.spriteAttachedTo().destroy(effects.fire, 500)
+    list.pop()
 })
 function level1 () {
     info.setLife(3)
@@ -604,12 +1138,19 @@ function exposition () {
     game.showLongText("Left/Right buttons to move", DialogLayout.Bottom)
     game.showLongText("Up button to jump", DialogLayout.Bottom)
     game.showLongText("A lets you fire your weapon", DialogLayout.Bottom)
-    game.showLongText("B is to heal", DialogLayout.Bottom)
+    game.showLongText("B is to heal (1 heart = 1 heal available)", DialogLayout.Bottom)
     game.showLongText("Remember, take out enemies before they take out you.", DialogLayout.Bottom)
     game.showLongText("A healthbar will indicate who's worse for wear.", DialogLayout.Bottom)
-    game.showLongText("Medkits will let you heal.", DialogLayout.Bottom)
-    game.showLongText("You will need to reload occasionally.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll have to reload.", DialogLayout.Bottom)
     game.showLongText("Don't be in the open when your bullets hit zero.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
+    game.showLongText("When your bullet count hits 0, you'll reload.", DialogLayout.Bottom)
     game.showLongText("Alright, I think that's all.", DialogLayout.Top)
     game.showLongText("Good luck, 008.", DialogLayout.Top)
 }
@@ -627,13 +1168,16 @@ let thug41: Sprite = null
 let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
+let score = 0
 let thugBar2: StatusBarSprite = null
 let mySprite: Sprite = null
+let jump = 0
 let thugBar1: StatusBarSprite = null
+let bulletList: Sprite[] = []
 let list: Sprite[] = []
 level1()
 list = []
-let bulletList: number[] = []
+bulletList = []
 game.onUpdateInterval(2000, function () {
     for (let value of list) {
         projectile = sprites.createProjectileFromSprite(img`
@@ -657,7 +1201,7 @@ game.onUpdateInterval(2000, function () {
     }
 })
 forever(function () {
-    if (info.score() == 1) {
+    if (score == 1) {
         if (sight.isInSight(
         thug11,
         mySprite,
@@ -686,7 +1230,20 @@ forever(function () {
     }
 })
 forever(function () {
-    if (info.score() == 1) {
+    if (score == 1) {
+    	
+    }
+})
+forever(function () {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
+    if (score == 1) {
         if (sight.isInSight(
         thug31,
         mySprite,
@@ -703,9 +1260,444 @@ forever(function () {
             thug61.ay = 1000
         }
     }
+}
+forever(function () {
+    if (score == 1) {
+        if (info.score() == 0) {
+            if (facing == 0) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d 4 . . 
+                    . . . . . d d d d . 4 . . 
+                    . . . . . d d d d . 4 d 4 
+                    . . . . . . d . . . 4 6 . 
+                    . . . 6 6 9 d 9 6 6 6 6 . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . d 6 6 6 6 6 . . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+            if (facing == 1) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . 4 d d f 1 d 5 . . . . 
+                    . . 4 . d d d d . . . . . 
+                    4 d 4 . d d d d . . . . . 
+                    . 6 4 . . . d . . . . . . 
+                    . 6 6 6 6 9 d 9 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . . d d f 1 d 5 . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+        }
+    }
 })
 forever(function () {
-    if (info.score() == 1) {
+    if (score == 1) {
+    if (score == 1) {
+        if (info.score() == 0) {
+            if (facing == 0) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d 4 . . 
+                    . . . . . d d d d . 4 . . 
+                    . . . . . d d d d . 4 d 4 
+                    . . . . . . d . . . 4 6 . 
+                    . . . 6 6 9 d 9 6 6 6 6 . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . d 6 6 6 6 6 . . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+            if (facing == 1) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . 4 d d f 1 d 5 . . . . 
+                    . . 4 . d d d d . . . . . 
+                    4 d 4 . d d d d . . . . . 
+                    . 6 4 . . . d . . . . . . 
+                    . 6 6 6 6 9 d 9 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . . d d f 1 d 5 . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+        }
+    }
+}
+forever(function () {
+    if (score == 1) {
+    if (score == 1) {
+        if (info.score() == 0) {
+            if (facing == 0) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d 4 . . 
+                    . . . . . d d d d . 4 . . 
+                    . . . . . d d d d . 4 d 4 
+                    . . . . . . d . . . 4 6 . 
+                    . . . 6 6 9 d 9 6 6 6 6 . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . d 6 6 6 6 6 . . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+            if (facing == 1) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . 4 d d f 1 d 5 . . . . 
+                    . . 4 . d d d d . . . . . 
+                    4 d 4 . d d d d . . . . . 
+                    . 6 4 . . . d . . . . . . 
+                    . 6 6 6 6 9 d 9 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . . d d f 1 d 5 . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+        }
+    }
+}
+
+forever(function () {
+    if (score == 1) {
+    if (score == 1) {
+        if (info.score() == 0) {
+            if (facing == 0) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d 4 . . 
+                    . . . . . d d d d . 4 . . 
+                    . . . . . d d d d . 4 d 4 
+                    . . . . . . d . . . 4 6 . 
+                    . . . 6 6 9 d 9 6 6 6 6 . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . d 6 6 6 6 6 . . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+            if (facing == 1) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . 4 d d f 1 d 5 . . . . 
+                    . . 4 . d d d d . . . . . 
+                    4 d 4 . d d d d . . . . . 
+                    . 6 4 . . . d . . . . . . 
+                    . 6 6 6 6 9 d 9 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . . d d f 1 d 5 . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+        }
+    }
+}
+forever(function () {
+    if (score == 1) {
+    if (score == 1) {
+        if (info.score() == 0) {
+            if (facing == 0) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d 4 . . 
+                    . . . . . d d d d . 4 . . 
+                    . . . . . d d d d . 4 d 4 
+                    . . . . . . d . . . 4 6 . 
+                    . . . 6 6 9 d 9 6 6 6 6 . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . 6 6 6 9 6 6 . . . . 
+                    . . . d 6 6 6 6 6 . . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . . 5 5 5 5 . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . 5 d d d d . . . . 
+                    . . . . 5 d 1 f d d . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . d d d d . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+            if (facing == 1) {
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . 4 d d f 1 d 5 . . . . 
+                    . . 4 . d d d d . . . . . 
+                    4 d 4 . d d d d . . . . . 
+                    . 6 4 . . . d . . . . . . 
+                    . 6 6 6 6 9 d 9 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 9 6 6 6 . . . 
+                    . . . . 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+                info.setScore(10)
+                pause(5000)
+                mySprite.setImage(img`
+                    . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 . . . . . 
+                    . . . . 5 d d d 5 . . . . 
+                    . . . . d d d d 5 . . . . 
+                    . . . d d f 1 d 5 . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . d d d d . . . . . 
+                    . . . . . . d . . . . . . 
+                    . . . 6 6 9 d 9 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . 6 6 6 9 6 6 6 . . . 
+                    . . . d 6 6 6 6 6 d . . . 
+                    . . . . 6 6 6 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . 6 6 . 6 6 . . . . 
+                    . . . . f f . f f . . . . 
+                    `)
+            }
+        }
+    }
+}
+forever(function () {
+    if (score == 1) {
         if (sight.isInSight(
         thug21,
         mySprite,
