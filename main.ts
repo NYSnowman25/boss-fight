@@ -507,6 +507,9 @@ function level2 () {
     escapeTruck.destroy()
     mySprite.setPosition(16, 210)
 }
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    game.over(false)
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . . . . . . . 
