@@ -414,6 +414,10 @@ function getOutOfCar () {
     mySprite.ay = 200
     controller.moveSprite(mySprite, 100, 0)
     scene.cameraFollowSprite(mySprite)
+    statusbar = statusbars.create(4, 50, StatusBarKind.Health)
+    statusbar.setColor(7, 2)
+    statusbar.setOffsetPadding(2, 2)
+    statusbar.positionDirection(CollisionDirection.Left)
     spawnThugs1()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile25`, function (sprite, location) {
@@ -645,6 +649,7 @@ function level1 () {
 }
 function level2 () {
     tiles.setTilemap(tilemap`level10`)
+    escapeTruck.destroy()
     mySprite.setPosition(16, 210)
 }
 function exposition () {
@@ -668,6 +673,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile26`, function (sprite, 
     mySprite.vy += -400
 })
 let projectile: Sprite = null
+let statusbar: StatusBarSprite = null
 let escapeTruck: Sprite = null
 let megaCrav: Sprite = null
 let bullet: Sprite = null
