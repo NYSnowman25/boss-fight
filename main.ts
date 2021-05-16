@@ -4,9 +4,20 @@ namespace SpriteKind {
     export const thug = SpriteKind.create()
     export const enemyProjectile = SpriteKind.create()
     export const badThug = SpriteKind.create()
+    export const gunThug_1 = SpriteKind.create()
+    export const gunThug_2 = SpriteKind.create()
+    export const blondeProjectile = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_1, function (sprite, otherSprite) {
+    thugBar1.value += 10
+    sprite.destroy()
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.vy += -100
+})
+sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_2, function (sprite, otherSprite) {
+    thugBar2.value += 10
+    sprite.destroy()
 })
 function spawnThugs1 () {
     info.setScore(1)
@@ -27,7 +38,11 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.thug)
+        `, SpriteKind.gunThug_1)
+    thugBar1 = statusbars.create(20, 4, StatusBarKind.Health)
+    thugBar1.value = 30
+    thugBar1.setColor(5, 2)
+    thugBar1.attachToSprite(thug11)
     list.push(thug11)
     thug11.setPosition(288, 217)
     thug21 = sprites.create(img`
@@ -47,7 +62,11 @@ function spawnThugs1 () {
         . . . . f f . f f . . . . . . . 
         . . . . f f . f f . . . . . . . 
         . . . . 2 2 . 2 2 . . . . . . . 
-        `, SpriteKind.thug)
+        `, SpriteKind.gunThug_2)
+    thugBar2 = statusbars.create(20, 4, StatusBarKind.Health)
+    thugBar2.value = 30
+    thugBar2.setColor(5, 2)
+    thugBar2.attachToSprite(thug21)
     thug21.setPosition(392, 183)
     list.push(thug21)
     thug31 = sprites.create(img`
@@ -154,7 +173,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . f f . f f . . . . . . 
             `)
         bullet.setPosition(mySprite.x, mySprite.y)
-        bullet.vx = 50
+        bullet.vx = 30
         pause(100)
         mySprite.setImage(img`
             . . . . . . . . . . . . . 
@@ -195,7 +214,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . f f . f f . . 
             `)
         bullet.setPosition(mySprite.x, mySprite.y)
-        bullet.vx = -50
+        bullet.vx = -30
         pause(100)
         mySprite.setImage(img`
             . . . . . . . . . . . . . 
@@ -264,27 +283,6 @@ function level3 () {
 }
 function getOutOfCar () {
     exposition()
-    mySprite = sprites.create(img`
-        . . . . . . . . . . . . . 
-        . . . . . 5 5 5 5 . . . . 
-        . . . . 5 d d d 5 . . . . 
-        . . . . 5 d d d d . . . . 
-        . . . . 5 d 1 f d d . . . 
-        . . . . . d d d d . . . . 
-        . . . . . d d d d . . . . 
-        . . . . . . d . . . . . . 
-        . . . 6 6 9 d 9 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . 6 6 6 9 6 6 6 . . . 
-        . . . d 6 6 6 6 6 d . . . 
-        . . . . 6 6 6 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . 6 6 . 6 6 . . . . 
-        . . . . f f . f f . . . . 
-        `, SpriteKind.Player)
-    mySprite.ay = 200
-    scene.cameraFollowSprite(mySprite)
-    controller.moveSprite(mySprite, 100, 0)
     bullet = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -302,7 +300,7 @@ function getOutOfCar () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Projectile)
+        `, SpriteKind.blondeProjectile)
     escapeTruck.setImage(img`
         ............................fffffffffff...........
         ............................ffffffffffff..........
@@ -629,10 +627,35 @@ let thug41: Sprite = null
 let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
+let thugBar2: StatusBarSprite = null
 let mySprite: Sprite = null
+let thugBar1: StatusBarSprite = null
 let list: Sprite[] = []
 level1()
 list = []
+let bulletList: number[] = []
+game.onUpdateInterval(2000, function () {
+    for (let value of list) {
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 5 5 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, value, -30, 0)
+    }
+})
 forever(function () {
     if (info.score() == 1) {
         if (sight.isInSight(
@@ -708,27 +731,5 @@ forever(function () {
                 . . . . . . . . 2 2 . 2 2 . . . 
                 `)
         }
-    }
-})
-game.onUpdateInterval(500, function () {
-    for (let value of list) {
-        projectile = sprites.createProjectileFromSprite(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 5 5 . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, value, -50, 0)
     }
 })
