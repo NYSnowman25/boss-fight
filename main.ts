@@ -10,10 +10,12 @@ namespace SpriteKind {
     export const fireball = SpriteKind.create()
     export const explosion = SpriteKind.create()
     export const slamAttack = SpriteKind.create()
+    export const mobBoss = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const thug_1 = StatusBarKind.create()
     export const thug_2 = StatusBarKind.create()
+    export const crabBar = StatusBarKind.create()
 }
 sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.gunThug_1, function (sprite, otherSprite) {
     thugBar1.value += -34
@@ -209,11 +211,15 @@ function level1 () {
         ..........dd..........................dd..........
         `, SpriteKind.Player)
     escapeTruck.setPosition(23, 204)
-    escapeTruck.vx = 400
+    escapeTruck.vx = 100
     scene.cameraFollowSprite(escapeTruck)
 }
 function monologue () {
-    game.showLongText("Hello there.", DialogLayout.Top)
+    game.showLongText("Ah, hello there 008.", DialogLayout.Top)
+    game.showLongText("So you've finally caught up to me.", DialogLayout.Top)
+    game.showLongText("And you've managed to get past my guards.", DialogLayout.Top)
+    game.showLongText("No matter, because you won't get past this!", DialogLayout.Top)
+    game.showLongText("Say hello to the Mega Crav, with a V!", DialogLayout.Top)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
     tiles.setTilemap(tilemap`level8`)
@@ -307,7 +313,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . f f . f f . . 
             `)
         if (0 < info.score()) {
-            timer.throttle("fire", 500, function () {
+            timer.throttle("fire", 2000, function () {
                 for (let value2 of bulletList) {
                     bullet = sprites.createProjectileFromSprite(img`
                         . . . . . . . . . . . . . . . . 
@@ -462,11 +468,33 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         `)
     facing = 1
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.slamAttack, function (sprite, otherSprite) {
+    game.over(false)
+})
 function level3 () {
     tiles.setTilemap(tilemap`level1`)
     game.splash("Level 2 complete.", "On to Level 3.")
     info.player2.setScore(3)
     mySprite.setPosition(8, 120)
+    mobBoss = sprites.create(img`
+        . . . . . . . . . . . . . 
+        . . . . . . 4 4 4 4 . . . 
+        . . . . . 4 4 4 4 4 4 . . 
+        . . . . . . d d d d . . . 
+        . . . . . d d f 1 d . . . 
+        . . . . . . d d d d . . . 
+        . . . . . . d d d d . . . 
+        . . . . . . . . d . . . . 
+        . . . . . 4 a 4 d 4 a 4 . 
+        . . . . . 4 a 4 a 4 a 4 . 
+        . . . . . 4 a 4 a 4 a 4 . 
+        . . . . 2 d a 4 a 4 a d . 
+        . . . . 2 . a 4 a 4 a . . 
+        . . . . . . a 4 . 4 a . . 
+        . . . . . . a 4 . 4 a . . 
+        . . . . . . f f . f f . . 
+        `, SpriteKind.mobBoss)
+    mobBoss.setPosition(308, 120)
 }
 function fire_ball () {
     fireBall = sprites.createProjectileFromSprite(img`
@@ -487,7 +515,7 @@ function fire_ball () {
         . . . . . . 5 5 5 5 . . . . . . 
         . . . . . . . 5 5 . . . . . . . 
         `, megaCrav, 0, -50)
-    fireBall.setKind(SpriteKind.fireball)
+    fireBall.setKind(SpriteKind.explosion)
     pause(1000)
     fireBall.ay = 200
 }
@@ -498,47 +526,51 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile29`, function (sprite, 
         ................................................
         ................................................
         ................................................
-        ......2222............................2222......
-        ......2222............................2222......
-        ....222222..22....................22..222222....
-        ....222222..22....................22..222222....
-        ....2222....2222................2222....2222....
-        ....2222....2222................2222....2222....
-        ..222222....2222................2222....222222..
-        ..222222....2222................2222....222222..
-        ..222222..222222................222222..222222..
-        ..222222..222222................222222..222222..
-        ..22222222222222................22222222222222..
-        ..22222222222222................22222222222222..
-        ..222222222222....................222222222222..
-        ..222222222222....................222222222222..
-        ....22222222..........2222..........22222222....
-        ....22222222......222222222222......22222222....
-        ......2222........222222222222........2222......
-        ......2222......22ff22222222ff22......2222......
-        ........2222....22ff22222222ff22....2222........
-        ........22222222222222222222222222222222........
-        ............222222222222222222222222............
-        ..............22222222222222222222..............
-        ..............22222222222222222222..............
-        ............ff..2222222222222222..ff............
-        ............ff..2222222222222222..ff............
-        ..........ff....ff222222222222ff....ff..........
-        ..........ff....ff222222222222ff....ff..........
-        ..........ff..ff................ff..ff..........
+        .......633............................336.......
+        ......6633............................3366......
+        .....66633..33....................33..33666.....
+        .....66633..33....................33..33666.....
+        ....6662....666..................666....2666....
+        ....6622....266..................662....2266....
+        ...66622....2666................6662....22666...
+        ...66622....2666................6662....22666...
+        ..666222..222666................666222..222666..
+        ..666222..222666................666222..222666..
+        ..6662222222666..................6662222222666..
+        ..6662222222666..................6662222222666..
+        ...66622222666....................66622222666...
+        ...6666222666......................6662226666...
+        ....66666666..........2222..........66666666....
+        .....666666.......222222222222.......666666.....
+        ......6666........888822228888........6666......
+        .......666......66ff22222222ff66......666.......
+        ........6666....62ff22222222ff26....6666........
+        .........666666622222222222222226666666.........
+        ............666622222222222222226666............
+        ..............66222222222222222266..............
+        ..............66622222222222222666..............
+        ............ff..6222222222222226..ff............
+        ............ff..6662222222222666..ff............
+        ..........ff....ff622222222226ff....ff..........
+        ..........ff....ff662222222266ff....ff..........
+        ..........ff..ff...6666666666...ff..ff..........
         ..........ff..ff................ff..ff..........
         ..........ff..ff................ff..ff..........
         ..........ff..ff................ff..ff..........
         ................................................
         ................................................
         `, SpriteKind.MegaCrav)
-    megaCrav.setPosition(260, 115)
+    megaCrav.setPosition(196, 115)
     megaCrav.startEffect(effects.fountain)
     pause(2000)
     effects.clearParticles(megaCrav)
     game.showLongText("Enjoy!", DialogLayout.Top)
     megaCrav.vx = -20
     crab = 1
+    crabBar = statusbars.create(100, 4, StatusBarKind.crabBar)
+    crabBar.setColor(2, 15)
+    crabBar.positionDirection(CollisionDirection.Top)
+    crabBar.value = 100
 })
 function level2 () {
     tiles.setTilemap(tilemap`level10`)
@@ -546,6 +578,47 @@ function level2 () {
     escapeTruck.destroy()
     mySprite.setPosition(16, 210)
 }
+statusbars.onStatusReached(StatusBarKind.crabBar, statusbars.StatusComparison.LTE, statusbars.ComparisonType.Percentage, 50, function (status) {
+    megaCrav.setImage(img`
+        ................................................
+        ................................................
+        ................................................
+        .......f33............................33f.......
+        ......ff33............................33ff......
+        .....fff33..33....................33..33fff.....
+        ....ffff33..33....................33..33ffff....
+        ....ffff....fff..................fff....ffff....
+        ....fff2....fff..................fff....2fff....
+        ...ffff2....ffff................ffff....2ffff...
+        ...ffff2....ffff................ffff....2ffff...
+        ..fffff2..22ffff................ffff22..2fffff..
+        ..fff222..2fffff................fffff2..222fff..
+        ..ffff22222ffff..................ffff22222ffff..
+        ..fffff222fffff..................fffff222fffff..
+        ...fffff2fffff....................fffff2fffff...
+        ...ffffffffff......................ffffffffff...
+        ....ffffffff..........ffff..........ffffffff....
+        .....ffffff.......882ffffff288.......ffffff.....
+        ......ffff........2282ffff2822........ffff......
+        .......fff......ffff282ff282ffff......fff.......
+        ........ffff....ffff222ff222ffff....ffff........
+        .........ffffffff2222ffffff2222ffffffff.........
+        ............ffffffffffffffffffffffff............
+        ..............ffffffffffffffffffff..............
+        ..............ffffffffffffffffffff..............
+        ............44..ffffffffffffffff..44............
+        ............4e..ffffffffffffffff..e4............
+        ..........44....44ffffffffffff44....44..........
+        ..........4e....4effffffffffffe4....e4..........
+        ..........4e..44...ffffffffff...44..e4..........
+        ..........4e..4e................e4..e4..........
+        ..........4e..4e................e4..e4..........
+        ..........4e..4e................e4..e4..........
+        ................................................
+        ................................................
+        `)
+    crab = 2
+})
 statusbars.onZero(StatusBarKind.Health, function (status) {
     game.over(false)
 })
@@ -570,12 +643,55 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         `)
     facing = 0
 })
+function closingSpeech () {
+    game.splash("He was not killed,", "only wounded.")
+    game.splash("Agent Blonde arrested", "the crime boss.")
+    game.splash("His men also surrendered", "when police arrived.")
+    game.splash("The region became much", "safer as a result.")
+    game.splash("Blonde decided to take a", "vacation after this.")
+    game.splash("He deserved it.  He'd", "done lots of hard work.")
+    game.splash("Anyway, this has been another", "adventure of:")
+    game.splash("\"008: Jack Blonde\"", "A James Bond ripoff.")
+    game.splash("Hope you enjoyed it.", "Bye!")
+}
 statusbars.onZero(StatusBarKind.thug_1, function (status) {
     thugBar1.spriteAttachedTo().destroy(effects.fire, 500)
     list.shift()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.explosion, function (sprite, otherSprite) {
+    statusbar.value += -20
+})
 scene.onOverlapTile(SpriteKind.MegaCrav, assets.tile`myTile30`, function (sprite, location) {
-    megaCrav.vx = -20
+    megaCrav.vx = 20
+    if (crab == 2) {
+        megaCrav.vx = 50
+    }
+})
+statusbars.onZero(StatusBarKind.crabBar, function (status) {
+    scene.cameraShake(4, 2000)
+    megaCrav.destroy(effects.spray, 2000)
+    tiles.setTilemap(tilemap`level31`)
+    mobBoss.say("!?!")
+    pause(5000)
+    mobBoss.setImage(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . 4 4 4 4 . . . . . . . 
+        . . . . 4 4 4 4 4 4 . . . . . . 
+        . . . . . d d d d . . . . . . . 
+        . . . . d d f 1 d . . . . . . . 
+        . . . d . d d d d . . d . . . . 
+        . . . 4 . d d d d . . 4 . . . . 
+        . . . 4 . . . d . . . 4 . . . . 
+        . . . . 4 a 4 d 4 a 4 . . . . . 
+        . . . . . a 4 a 4 a . . . . . . 
+        . . . . . a 4 a 4 a . . . . . . 
+        . . . . . a 4 a 4 a . . . . . . 
+        . . . . . a 4 a 4 a . . . . . . 
+        . . . . . a 4 . 4 a . . . . . . 
+        . . . . . a 4 . 4 a . . . . . . 
+        . . . . . f f . f f . . . . . . 
+        `)
+    mobBoss.say("W-wait!")
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.badThug, function (sprite, otherSprite) {
     game.over(false)
@@ -588,6 +704,7 @@ scene.onHitWall(SpriteKind.slamAttack, function (sprite, location) {
     scene.cameraShake(4, 500)
     pause(50)
     megaCrav.setKind(SpriteKind.MegaCrav)
+    megaCrav.vx = -20
 })
 function spawnThugs1 () {
     info.player2.setScore(3)
@@ -719,12 +836,63 @@ function spawnThugs1 () {
         `, SpriteKind.badThug)
     thug61.setPosition(528, 217)
 }
+sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.mobBoss, function (sprite, otherSprite) {
+    sprite.destroy()
+    tiles.setTilemap(tilemap`level32`)
+    statusbar.setColor(2, 15)
+    mobBoss.setImage(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f . . . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . . . f f f f . . . . . . . 
+        . . . . f f f f f . . . . . . . 
+        . . . f . f f f f . . f . . . . 
+        . . . f . f f f f . . f . . . . 
+        . . . f . . . f . . . f . . . . 
+        . . . . f f f f f f f . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . . f f f f f . . . . . . 
+        . . . . . f f . f f . . . . . . 
+        . . . . . f f . f f . . . . . . 
+        . . . . . f f . f f . . . . . . 
+        `)
+    mySprite.setImage(img`
+        . . . . . . . . . . . . . 
+        . . . f f f f . . . . . . 
+        . . f f f f f . . . . . . 
+        . . f f f f f . . . . . . 
+        . . f f f f f f . . . . . 
+        . . . f f f f . . . . . . 
+        . . . f f f f . . . . . . 
+        . . . . f . . . . f f f f 
+        . f f f f f f f f f f . . 
+        . f f f f f f . . . f . . 
+        . f f f f f f . . . . . . 
+        . f f f f f f . . . . . . 
+        . . f f f f f . . . . . . 
+        . . f f . f f . . . . . . 
+        . . f f . f f . . . . . . 
+        . . f f . f f . . . . . . 
+        `)
+    pause(2000)
+    closingSpeech()
+    game.over(true)
+})
 function slam () {
     megaCrav.setVelocity(0, 100)
+    pause(100)
     megaCrav.setKind(SpriteKind.slamAttack)
     pause(2000)
     megaCrav.ay = 200
 }
+scene.onOverlapTile(SpriteKind.MegaCrav, assets.tile`myTile34`, function (sprite, location) {
+    megaCrav.vx = -20
+    if (crab == 2) {
+        megaCrav.vx = -50
+    }
+})
 scene.onHitWall(SpriteKind.fireball, function (sprite, location) {
     boom = sprites.create(img`
         ................................
@@ -765,6 +933,17 @@ scene.onHitWall(SpriteKind.fireball, function (sprite, location) {
     pause(1000)
     boom.destroy(effects.warmRadial, 1000)
 })
+sprites.onOverlap(SpriteKind.blondeProjectile, SpriteKind.MegaCrav, function (sprite, otherSprite) {
+    if (crab == 1) {
+        crabBar.value += -2
+    }
+    if (crab == 2) {
+        crabBar.value += -1
+    }
+})
+scene.onOverlapTile(SpriteKind.MegaCrav, assets.tile`myTile33`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level30`)
+})
 function exposition () {
     game.showLongText("Hello, 008.  Congrats on escaping that prison.", DialogLayout.Top)
     game.showLongText("The data you were able to collect in there was extremely useful for our operations.", DialogLayout.Top)
@@ -793,9 +972,11 @@ let thug31: Sprite = null
 let thug21: Sprite = null
 let thug11: Sprite = null
 let score = 0
+let crabBar: StatusBarSprite = null
 let crab = 0
 let megaCrav: Sprite = null
 let fireBall: Sprite = null
+let mobBoss: Sprite = null
 let projectile: Sprite = null
 let bullet: Sprite = null
 let facing = 0
@@ -1003,8 +1184,13 @@ forever(function () {
         timer.throttle("jump attack", 10000, function () {
             slam()
         })
-        if (megaCrav.isHittingTile(CollisionDirection.Left)) {
-            megaCrav.vx = 20
-        }
+    }
+    if (crab == 2) {
+        timer.throttle("fire ball", 1000, function () {
+            fire_ball()
+        })
+        timer.throttle("jump attack", 5000, function () {
+            slam()
+        })
     }
 })
